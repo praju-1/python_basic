@@ -47,9 +47,6 @@ class circle(shape):
         # calculate area of circle
         return math.pi * self.radius **2
 
-#
-# Entrypoint of program
-#
 if __name__ == "__main__":
     rect = rectangle(10, 20)
     print(" Area of rectangle is: ", rect.get_area())
