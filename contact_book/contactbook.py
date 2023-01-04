@@ -87,7 +87,9 @@ class ContactBook:
             return
         
         filename = input(" Please enter filename to save contacts records : ")
+        """opening file in binary mode for writing"""
         with open(filename, 'wb') as handle:
+            "dump() function to store the object data to the file."
             pickle.dump(self.contactbook, handle)
         print (" Your records saved succesfully in " + filename)
    
@@ -112,4 +114,3 @@ class ContactBook:
                 print (" Your number deleted succesfully ")
             else:
                 print(" number not exist ")
-    
