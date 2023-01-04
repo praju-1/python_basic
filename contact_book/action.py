@@ -24,7 +24,9 @@ class Actions:
         self.acts[key] = {function:cmd_desc}
         
     def __str__(self):
+        "This method returns the string representation of the object."
         menu = str("\n----------------------------------\n")
+        
         for key in self.acts.keys():
             embed = self.acts.get(key)
             for desc in embed.values():
