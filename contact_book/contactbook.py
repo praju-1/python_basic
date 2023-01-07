@@ -37,80 +37,101 @@ class ContactBook:
         self.contactbook = {}
 
     def __str__(self):
-        recs = str()
-        if len(self.contactbook) == 0:
-            recs = str(" No records to display")
+        try:
+            recs = str()
+            if len(self.contactbook) == 0:
+                recs = str(" No records to display")
+                return recs
+            
+            for contact in self.contactbook.values():
+                recs += str(contact)
             return recs
-        
-        for contact in self.contactbook.values():
-            recs += str(contact)
-        return recs
+        except Exception as e:
+            print(e)
 
     def add_contact(self):
         """ Adding information for contact """
-        self.on_book = int(input(" How many contact records do you want: "))
-        for contact in range(0, self.on_book):
-            print ("\n-------- Record", contact+1, "----------")
-            name = str(input(" Please enter name : "))
-            number = int(input(" Please enter 10 digit contact number : "))
-            city = str(input(" Please enter name of city : "))
-            email = str(input(" Please enter the email_id : "))
-            """ validating email_id """
-            if not re.match(r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$",email):
-                print("\n Please enter valid email_id ")
+        try:
+            self.on_book = int(input(" How many contact records do you want: "))
+            for contact in range(0, self.on_book):
+                print ("\n-------- Record", contact+1, "----------")
+                name = str(input(" Please enter name : "))
+                number = int(input(" Please enter 10 digit contact number : "))
+                city = str(input(" Please enter name of city : "))
+                email = str(input(" Please enter the email_id : "))
+                """ validating email_id """
+                if not re.match(r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$",email):
+                    print("\n Please enter valid email_id ")
 
-            cont = Contact(name, number, city, email)
-            self.contactbook[cont.number]=cont
+                cont = Contact(name, number, city, email)
+                self.contactbook[cont.number]=cont
+        except Exception as e:
+            print(e)
 
     def display_all(self):
         """ Display all entered contact records """
-        print(self)
+        try:
+            print(self)
+        except Exception as e:
+            print(e)
 
     def search_contact(self):
         """ Searching contacts for an user """
-        if len(self.contactbook) == 0:
-            print (" No data entered ")
-        else:
-            number = int(input(" Please enter number for search : "))
-            if len(str(number)) < 10:
-                print (" Invalid number. Please enter valid number ")
-            elif number in self.contactbook:
-                cont = self.contactbook[number]
-                print (cont)
+        try:
+            if len(self.contactbook) == 0:
+                print (" No data entered ")
             else:
-                print (" contact record not found ")
-  
+                number = int(input(" Please enter number for search : "))
+                if len(str(number)) < 10:
+                    print (" Invalid number. Please enter valid number ")
+                elif number in self.contactbook:
+                    cont = self.contactbook[number]
+                    print (cont)
+                else:
+                    print (" contact record not found ")
+        except Exception as e:
+            print(e)
+              
     def serialize(self):
         """ save contact records in file provided by user """
-        if len(self.contactbook) == 0:
-            print (" No record to serialize. ")
-            return
-        
-        filename = input(" Please enter filename to save contacts records : ")
-        """opening file in binary mode for writing"""
-        with open(filename, 'wb') as handle:
-            "dump() function to store the object data to the file."
-            pickle.dump(self.contactbook, handle)
-        print (" Your records saved succesfully in " + filename)
-   
+        try:
+            if len(self.contactbook) == 0:
+                print (" No record to serialize. ")
+                return
+            
+            filename = input(" Please enter filename to save contacts records : ")
+            """opening file in binary mode for writing"""
+            with open(filename, 'wb') as handle:
+                "dump() function to store the object data to the file."
+                pickle.dump(self.contactbook, handle)
+            print (" Your records saved succesfully in " + filename)
+        except Exception as e:
+            print(e)
+
     def deserialize(self):
         """ Read records from file """
-        filename = input(" Please enter filename to read contact records : ")
-        if path.exists(filename):
-            with open(filename, 'rb') as handle:
-                self.contactbook = pickle.load(handle)
-                print (" Your records restored succesfully.")
-        else:
-            print ("File", filename, "does not exist")
+        try:
+            filename = input(" Please enter filename to read contact records : ")
+            if path.exists(filename):
+                with open(filename, 'rb') as handle:
+                    self.contactbook = pickle.load(handle)
+                    print (" Your records restored succesfully.")
+            else:
+                print ("File", filename, "does not exist")
+        except Exception as e:
+            print(e)
 
     def remove_contact(self):
         """ remove contact from contactbook"""
-        if len(self.contactbook) == 0:
-            print (" No data to be deleted ")
-        else:
-            number = int(input(" Enter number you want to delete : "))
-            if number in self.contactbook:
-                del self.contactbook[number]
-                print (" Your number deleted succesfully ")
+        try:
+            if len(self.contactbook) == 0:
+                print (" No data to be deleted ")
             else:
-                print(" number not exist ")
+                number = int(input(" Enter number you want to delete : "))
+                if number in self.contactbook:
+                    del self.contactbook[number]
+                    print (" Your number deleted succesfully ")
+                else:
+                    print(" number not exist ")
+        except Exception as e:
+            print(e)
