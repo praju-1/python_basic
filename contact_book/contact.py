@@ -31,8 +31,11 @@ class Contact:
 
     def __str__(self):
         """ Display record format """
-        return "\n----------------------------------------\n" + \
-            "\nName     : " + self.name + \
-            "\nNumber   : " + str(self.number) + \
-            "\nCity     : " + self.city + \
-            "\nEmail    : " + self.email   
+        try:
+            return "\n----------------------------------------\n" + \
+                "\nName     : " + self.name + \
+                "\nNumber   : " + str(self.number) + \
+                "\nCity     : " + self.city + \
+                "\nEmail    : " + self.email   
+        except Exception as e:
+            print(e)
