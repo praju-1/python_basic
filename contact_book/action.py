@@ -21,28 +21,39 @@ class Actions:
         self.choice = 0
         
     def register(self, key, function, cmd_desc):
-        self.acts[key] = {function:cmd_desc}
-        
+        try:
+            self.acts[key] = {function:cmd_desc}
+        except Exception as e:
+            print(e)
+
     def __str__(self):
         "This method returns the string representation of the object."
-        menu = str("\n----------------------------------\n")
-        
-        for key in self.acts.keys():
-            embed = self.acts.get(key)
-            for desc in embed.values():
-                menu += str(key) + ". " + desc + "\n"
-        return menu
+        try:
+            menu = str("\n----------------------------------\n")
+            
+            for key in self.acts.keys():
+                embed = self.acts.get(key)
+                for desc in embed.values():
+                    menu += str(key) + ". " + desc + "\n"
+            return menu
+        except Exception as e:
+            print(e)
 
     def userchoice(self):
         """ User choices input """
-        self.choice = int(input(" Please Enter your choice :- "))
+        try:
+            self.choice = int(input(" Please Enter your choice :- "))
+        except Exception as e:
+            print(e)
 
     def run(self):
         """ Working on user choices """
-        while True:
-            print (self)
-            self.userchoice()
-            work = self.acts.get(self.choice)
-            if work is not None:
-                list(work.keys())[0]()
-                
+        try:
+            while True:
+                print (self)
+                self.userchoice()
+                work = self.acts.get(self.choice)
+                if work is not None:
+                    list(work.keys())[0]()
+        except Exception as e:
+            print(e)           
