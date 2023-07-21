@@ -1,0 +1,7 @@
+{
+    "Name" : "John",
+    "Id" : 123,
+    "Departmemt" : "IT",
+    "Position" : "Data Scientist",
+    "Location" : "Pune"
+}
