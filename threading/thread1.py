@@ -41,4 +41,3 @@ if __name__ == "__main__":
     # join thread
     even_thread.join()
     odd_thread.join()
-
